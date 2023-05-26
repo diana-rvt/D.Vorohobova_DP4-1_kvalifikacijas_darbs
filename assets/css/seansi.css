@@ -1,0 +1,112 @@
+#seansu-katalog {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    max-width: 1100px;
+    padding: 0px 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#seansu-katalog .film {
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    background-color: #c4c4c440;
+    border-radius: 8px;
+    margin: 20px;
+}
+
+#seansu-katalog .poster {
+    background-color: orange;
+    border-radius: 8px;
+    width: 153px;
+    height: 230px;
+}
+
+#seansu-katalog .poster img {
+    width: 153px;
+    height: 230px;
+}
+
+#seansu-katalog .film-name {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    flex-grow: 1;
+    width: 30%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#seansu-katalog .film-name .name_description {
+    min-height: 180px;
+}
+
+#seansu-katalog .film-name a {
+    color: black;
+    text-decoration: none;
+    line-height: 36px;
+    font-size: 24px;
+}
+
+#seansu-katalog .film-name a:hover {
+    color: orange;
+    transition: .1s ease-in-out;
+}
+
+.date-time {
+    border-left: solid 2px #d1d1d1;
+    text-align: right;
+    padding-right: 10px;
+    line-height: 36px;
+    font-size: 22px;
+    width: 220px;
+}
+
+.date-time a {
+    text-decoration: none;
+}
+
+.description {
+    padding-top: 20px;
+    color: #464646;
+}
+
+/* BUTTON */
+
+.date-time button {
+    font-family: 'Montserrat';
+    border: none;
+    margin-top: 105px;
+    padding: 0 14px;
+    font-size: 18px;
+    background-color: orange;
+    border-radius: 7px;
+    height: 42px;
+    color: white;
+    cursor: pointer;
+}
+
+.date-time button:hover {
+    background-color: rgba(255, 166, 0, 0.642);
+    transition: .1s ease-in-out;
+}
+
+.zanrs, .ilgums, .vec_ier {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+  }
+  
+  .zanrs {
+    color: #ffffff;
+    background-color: orange;
+  }
+  
+  .vec_ier {
+    color: #ffffff;
+    float: right;
+  }

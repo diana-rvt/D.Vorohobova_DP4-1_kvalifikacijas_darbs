@@ -1,0 +1,26 @@
+.container {
+    max-width: 1000px;
+    margin: 80px auto 150px auto;
+    text-align: center;
+}
+
+.container div {
+    display: inline-block;
+}
+
+.container div:first-child {
+    margin-right: 150px;
+}
+
+.container div button {
+    border: none;
+    color: white;
+    height: 45px;
+    width: 220px;
+    font-size: 18px;
+    font-family: 'Montserrat';
+    background-color: orange;
+    padding: 0 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}

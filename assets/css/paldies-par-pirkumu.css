@@ -1,0 +1,12 @@
+/* CONTAINER */
+
+.container {
+    max-width: 1000px;
+    text-align: center;
+    margin: 10px auto 200px auto;
+    color: #2F4858;
+}
+
+#h1 {
+    padding-top: 250px;
+}

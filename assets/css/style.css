@@ -1,0 +1,10 @@
+/* CONTAINER */
+
+.container {
+    position: relative;
+    max-width: 1000px;
+    background-color: rgb(255, 127, 251);
+    top: 78px;
+    margin-left: auto;
+    margin-right: auto;
+}

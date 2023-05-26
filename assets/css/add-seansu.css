@@ -1,0 +1,214 @@
+#select {
+    margin: 30px auto;
+    padding: 0 40px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1100px;
+}
+
+form label {
+    color:#FFA800;
+    line-height: 50px;
+}
+
+/* SELECT */
+#buy-ticket button {
+    position: relative;
+    font-family: 'Montserrat';
+    font-size: 18px;
+    color: #2F4858;
+    background-color: #E7E7E7;
+    border-radius: 7px;
+    padding: 0 14px;
+    height: 44.6px;
+    border: none;
+    cursor: pointer;
+    margin: 50px 0 0px auto;
+}
+
+/* SELECT */
+
+/*the container must be positioned relative:*/
+.custom-select {
+    position: relative;
+    font-family: 'Montserrat';
+    width: 150px;
+  }
+  
+  .custom-select select {
+    display: none; /*hide original SELECT element:*/
+  }
+  
+  .select-selected {
+    background-color: #E7E7E7;
+    border-radius: 7px;
+    width: 150px;
+  }
+  
+  /*style the arrow inside the select element:*/
+  .select-selected:after {
+    position: absolute;
+    content: "";
+    top: 69.5px;
+    right: 10px;
+    width: 14px;
+    height: 8px;
+    background-image: url("../img/list.png");
+    background-size: 14px 8px;
+  }
+  
+  /*point the arrow upwards when the select box is open (active):*/
+  .select-selected.select-arrow-active:after {
+    top: 69.5px;
+  }
+  
+  /*style the items (options), including the selected item:*/
+  .select-items div,.select-selected {
+    color: #2F4858;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 12.5px 16px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .select-arrow-active {
+    border-radius: 7px 7px 0 0;
+  }
+  
+  /*style items (options):*/
+  .select-items {
+    position: absolute;
+    background-color: #E7E7E7;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border-radius: 0 0 7px 7px;
+  }
+  
+  /*hide the items when the select box is closed:*/
+  .select-hide {
+    display: none;
+  }
+  
+  .select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+
+#buy-ticket button {
+    background-color: orange;
+    color: white;
+}
+
+#buy-ticket button:hover {
+    background-color: rgba(255, 166, 0, 0.642);
+}
+
+
+/* FILM */
+
+#katalog {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.film {
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    background-color: #c4c4c440;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.poster {
+    background-color: orange;
+    border-radius: 8px;
+    width: 180px;
+    height: 230px;
+}
+
+.film-name {
+    text-align: left;
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+.film-name a {
+    color: black;
+    text-decoration: none;
+    line-height: 36px;
+    font-size: 24px;
+}
+
+.film-name a:hover {
+    color: orange;
+    transition: .1s ease-in-out;
+}
+
+.date-time {
+    border-left: solid 2px #d1d1d1;
+    text-align: right;
+    padding-right: 10px;
+    line-height: 36px;
+    font-size: 22px;
+    width: 220px;
+}
+
+.description {
+    padding-top: 20px;
+}
+
+textarea {
+    font-family: 'Montserrat';
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    height: 170px;
+    padding-left: 10px;
+    padding-top: 10px;
+    resize: none;
+}
+
+#film-name {
+    font-family: 'Montserrat';
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    height: 40px;
+    padding-left: 10px;
+    width: 400px;
+
+}
+
+/*Date and Time*/
+
+#date, #time {
+    border: none;
+    background-color: #E7E7E7;
+    height: 44.6px;
+    width: 150px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 8px;
+}
+
+.label p {
+    line-height: 50px;
+    color: orange;
+}
+
+#katalog {
+    width: 100%;
+}

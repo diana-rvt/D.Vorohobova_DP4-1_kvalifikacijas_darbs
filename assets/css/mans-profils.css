@@ -1,0 +1,56 @@
+/* CONTAINER */
+
+.container {
+    background-color: #c4c4c440;
+    border-radius: 8px;
+    padding: 10px;
+    max-width: 620px;
+    margin: 30px auto 0px auto;
+    color: #2F4858;
+    line-height: 40px;
+}
+
+.container p {
+    display: inline-block;
+    width: 300px;
+}
+
+.container div p:first-child {
+    font-weight: 600;
+}
+
+#dzest {
+    max-width: 79.04px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#dzest button {
+    position: relative;
+    font-family: 'Montserrat';
+    font-size: 18px;
+    color: #2F4858;
+    background-color: #E7E7E7;
+    border-radius: 7px;
+    padding: 0 14px;
+    height: 44.6px;
+    border: none;
+    cursor: pointer;
+    margin: 50px 0 0px auto;
+}
+
+#dzest a {
+  text-decoration: none;
+}
+
+#dzest button {
+    margin: auto;
+    background-color: orange;
+    color: white;
+}
+
+#dzest button:hover {
+    background-color: rgba(255, 166, 0, 0.642);
+}
+
