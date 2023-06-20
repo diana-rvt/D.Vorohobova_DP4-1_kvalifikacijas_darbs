@@ -2,15 +2,15 @@
 <html lang="lv">
     <head>
         <meta charset="utf-8">
-        <title>Filmas</title>
+        <title>Piedāvājumi</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
-        <link rel="stylesheet" type="text/css" href="assets/css/filmu-katalogs.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/piedavajumi.css">
         <link rel="stylesheet" type="text/css" href="assets/css/header-style.css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     </head>
     <body>
-        <header>
-            <?php setcookie('error', 'none', "pievienoties.php");?>
+    <header>
+        <?php setcookie('error', 'none', "pievienoties.php");?>
             <nav>
                 <a href="index.php" id="logo"><img src="assets/img/logo.png"></a>
                 <ul id="menu">
@@ -31,47 +31,65 @@
                         <?php endif;?>
                     <?php endif;?>
                     <li id="search">
-                        <form action="?search=<?php echo $_GET['search'];?>" method="get"><input type="search" name="search" placeholder="Atrast filmu">
+                    <form action="filmu-katalogs.php?search=<?php echo $_GET['search'];?>" method="get"><input type="search" name="search" placeholder="Atrast filmu">
                         </form>
                     </li>
                 </ul>
             </nav>
         </header>
-        <h1>Filmas</h1>
-        <div id="katalog">
-            <?php
+        
+        <h1>Piedāvājumi</h1>
+        <div id="seansu-katalog">
+        <?php
             $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
-            $max_number = $mysql->query("SELECT MAX(`FilmaID`) FROM `filmas`");
+            $max_number = $mysql->query("SELECT MAX(`AtlaideID`) FROM `atlaides`");
             $max_n = $max_number -> fetch_assoc();
-            $search_result = $_GET["search"];
-            for ($x = $max_n['MAX(`FilmaID`)']; $x >= 1; $x--) { 
-                $result = $mysql->query("SELECT `Nosaukums` FROM `filmas` WHERE `FilmaID` = '$x' AND (`Nosaukums` LIKE '%$search_result%' OR `Zanrs` LIKE '%$search_result%' OR `Apraksts` LIKE '%$search_result%')");
+
+            for ($x = $max_n['MAX(`AtlaideID`)']; $x >= 1; $x--) { 
+                $result = $mysql->query("SELECT `AtlaideID`, `Nosaukums`, `Apraksts`, `Procents` 
+                FROM `atlaides` 
+                WHERE `AtlaideID` = '$x'");
                 $user = $result -> fetch_assoc();
+
                 if (!empty($user['Nosaukums'])): ?> 
-
-                
                 <div class="film">
-                    <a href="films.php?id=<?php echo $x;?>" class="poster">
-                    <?php 
-                        $result = $mysql->query("SELECT `Nosaukums`, `Apraksts`, `Attels` FROM `filmas` WHERE `FilmaID` = '$x'");
-                        $user = $result -> fetch_assoc();
-                        ?> 
-                        <img src="data:image/jpeg;base64, <?php echo base64_encode($user['Attels']); ?>" alt="">
-                    </a>
-                
-                    <div class="film-name">
-                        <a href="films.php?id=<?php echo $x;?>">
-                            <?php echo htmlspecialchars($user['Nosaukums']); ?>
-                        </a>
+                <p class="poster">
+                <?php echo htmlspecialchars($user['Procents']);?>%
+                </p>
+                <div class="film-name">
+                    <div class="name_description">
+                    <?php echo htmlspecialchars($user['Nosaukums']);?>
+                    <div class="description">
+                    <?php echo htmlspecialchars($user['Apraksts']);?>
                     </div>
-                </div>
-                
+                    </div>
 
-                <?php endif; } ?>
-            <div class="film" style="height: 10px;"></div>
-            <div class="film" style="height: 10px;"></div>
-            <div class="film" style="height: 10px;"></div>
-            <div class="film" style="height: 10px;"></div>
+
+
+                
+                </div>
+                <div class="date-time">
+                    <p>Procents: <?php echo htmlspecialchars($user['Procents']);?>%</p>
+                    
+                   
+
+                    <?php 
+                        if($_COOKIE['user'] == 'admin@mail.com'): 
+                    ?>
+                        <a href="rediget-piedavajums.php?id=<?php echo $user['AtlaideID'];?>">
+                            <button>Rediģēt</button>
+                        </a>
+                        <a href="delete-piedavajums.php?id=<?php echo $user['AtlaideID'];?>">
+                            <button>Dzēst</button>
+                        </a>
+                    <?php endif;?>
+
+
+                </div>
+            </div>
+            <?php endif; }
+            ?>
+
         </div>
         <footer id="footer">
             <div class="footer-links"><a href="seansi.php">Tuvākie seansi</a></div>

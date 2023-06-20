@@ -15,6 +15,8 @@
                 <ul id="menu">
                     <li><a href="seansi.php">Tuvākie seansi</a></li>
                     <li><a href="filmu-katalogs.php">Filmas</a></li>
+                    <li><a href="piedavajumi.php">Piedāvājumi</a></li>
+                    <li><a href="par-kinoteatru.php">Par mums</a></li>
                     <li id="lv"><a href="#">LV</a></li>
                     <li id="login-button"><a href="pievienoties.php">Ienākt</a></li>
                     <li id="search">
@@ -41,9 +43,9 @@
         <footer id="footer">
             <div class="footer-links"><a href="seansi.php">Tuvākie seansi</a></div>
             <div class="footer-links"><a href="filmu-katalogs.php">Filmas</a></div>
-            <div class="footer-links"><a href="#">Par uzņēmumu</a></div>
+            <div class="footer-links"><a href="par-kinoteatru.php">Par kinoteātri</a></div>
             <div class="footer-links"><a href="#">Vakances</a></div>
-            <div class="footer-links"><a href="#">Kontakti</a></div>
+            <div class="footer-links"><a href="kontakti.php">Kontakti</a></div>
             <div class="footer-links"><a href="#">Privātuma politika</a></div>
             <div class="footer-links">
                 <a href="#"><img src="assets/img/Vector (1).png"></a>

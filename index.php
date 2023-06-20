@@ -2,7 +2,7 @@
 <html lang="lv">
     <head>
         <meta charset="utf-8">
-        <title>Cinema</title>
+        <title>MyCinema</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         <link rel="stylesheet" type="text/css" href="assets/css/seansi.css">
@@ -18,6 +18,8 @@
                 <ul id="menu">
                     <li><a href="seansi.php">Tuvākie seansi</a></li>
                     <li><a href="filmu-katalogs.php">Filmas</a></li>
+                    <li><a href="piedavajumi.php">Piedāvājumi</a></li>
+                    <li><a href="par-kinoteatru.php">Par mums</a></li>
                     <li id="lv"><a href="#">LV</a></li>
                     <?php error_reporting(0);
                     if($_COOKIE['user'] == ''): ?>
@@ -40,7 +42,7 @@
         <h1><div class="h1_style">Tuvākie seansi</div></h1>
         <div id="seansu-katalog">
         <?php
-            $mysql = new mysqli('localhost', 'root', 'kiki', 'kino');
+            $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
             $max_number = $mysql->query("SELECT MAX(`SeanssID`) FROM `seansi`");
             $max_n = $max_number -> fetch_assoc();
             $z = 2;
@@ -49,7 +51,7 @@
                     SELECT COUNT(*) FROM `seansi` `s2`
                     WHERE `s2`.`Datums` < `s1`.`Datums` OR (`s2`.`Datums` = `s1`.`Datums` AND `s2`.`No` < `s1`.`No`) OR (`s2`.Datums = `s1`.Datums AND `s2`.`No` = `s1`.`No` AND `s2`.`SeanssID` < `s1`.`SeanssID`)
                 ) + 1 AS `row_num`,
-                `SeanssID`, `TelpaID`, `filmas`.`FilmaID`, `Datums`, `No`, `Statuss`, `Zanrs`, HOUR(`Ilgums`), MINUTE(`Ilgums`), `Vec ierobezojums`, `Apraksts`, `Attels`, `Nosaukums`, DAY(`Datums`), MONTHNAME(`Datums`), HOUR(`No`), MINUTE(`No`)
+                `SeanssID`, `TelpaID`, `filmas`.`FilmaID`, `Datums`, `No`, `Zanrs`, HOUR(`Ilgums`), MINUTE(`Ilgums`), `Vec ierobezojums`, `Apraksts`, `Attels`, `Nosaukums`, DAY(`Datums`), MONTHNAME(`Datums`), HOUR(`No`), MINUTE(`No`), HOUR(ADDTIME(`No`, `Ilgums`)), MINUTE(ADDTIME(`No`, `Ilgums`))
                 FROM `seansi` `s1`
                 INNER JOIN `filmas`
                 ON `filmas`.`FilmaID` = `s1`.`FilmaID`
@@ -69,7 +71,10 @@
                     <div class="name_description">
                     <a href="films.php?id=<?php echo $user['FilmaID'];?>"><?php echo htmlspecialchars($user['Nosaukums']);?></a>
                     <div class="description">
-                    <?php echo htmlspecialchars($user['Apraksts']);?>
+                    <?php
+                    $text = htmlspecialchars($user['Apraksts']);
+                    $limit = 300;
+                    echo substr($text, 0, $limit) . '...';?>
                     </div>
                     </div>
 
@@ -117,12 +122,18 @@
                 <div class="date-time">
                     <p>Datums: <?php echo htmlspecialchars($user['DAY(`Datums`)']) . " " . htmlspecialchars($user['MONTHNAME(`Datums`)']);?></p>
                     <p>Laiks: <?php echo htmlspecialchars($user['HOUR(`No`)']) . ":" . htmlspecialchars($user['MINUTE(`No`)']);?></p>
-                    
+                    <p id="lidz">Līdz: <?php echo htmlspecialchars($user['HOUR(ADDTIME(`No`, `Ilgums`))']) . ":" . htmlspecialchars($user['MINUTE(ADDTIME(`No`, `Ilgums`))']);?></p>
 
                     <?php 
+                    $z = $user['SeanssID'];
+                    
+                    $result3 = $mysql->query("SELECT COUNT(`BileteID`)
+                    FROM `biletes`
+                    WHERE `SeanssID` = '$z';");
+                    $user3 = $result3 -> fetch_assoc();
                         if($_COOKIE['user'] == ''): 
                     ?>
-                        <a href="pievienoties.php">
+                        <span style="color:grey; font-size: 18px;"><?php echo htmlspecialchars($user3['COUNT(`BileteID`)']);?>/48</span><a href="pievienoties.php">
                             <button>Pirkt biļeti</button>
                         </a>
                 
@@ -136,8 +147,8 @@
                         </a>
                     <?php else:
                     ?>
-                        <a href="buy-ticket.php?id=<?php echo $user['SeanssID'];?>&&name=<?php echo $user['FilmaID'];?>">
-                            <button>Pirkt biļeti</button>
+                        <span style="color:grey; font-size: 18px;"><?php echo htmlspecialchars($user3['COUNT(`BileteID`)']);?>/48</span><a href="buy-ticket.php?id=<?php echo $user['SeanssID'];?>&&name=<?php echo $user['FilmaID'];?>">
+                        <button>Pirkt biļeti</button>
                         </a>
                     <?php endif;?>
 
@@ -181,9 +192,9 @@
         <footer id="footer">
             <div class="footer-links"><a href="seansi.php">Tuvākie seansi</a></div>
             <div class="footer-links"><a href="filmu-katalogs.php">Filmas</a></div>
-            <div class="footer-links"><a href="#">Par uzņēmumu</a></div>
+            <div class="footer-links"><a href="par-kinoteatru.php">Par kinoteātri</a></div>
             <div class="footer-links"><a href="#">Vakances</a></div>
-            <div class="footer-links"><a href="#">Kontakti</a></div>
+            <div class="footer-links"><a href="kontakti.php">Kontakti</a></div>
             <div class="footer-links"><a href="#">Privātuma politika</a></div>
             <div class="footer-links">
                 <a href="#"><img src="assets/img/Vector (1).png"></a>

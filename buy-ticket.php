@@ -15,6 +15,8 @@
                 <ul id="menu">
                     <li><a href="seansi.php">Tuvākie seansi</a></li>
                     <li><a href="filmu-katalogs.php">Filmas</a></li>
+                    <li><a href="piedavajumi.php">Piedāvājumi</a></li>
+                    <li><a href="par-kinoteatru.php">Par mums</a></li>
                     <li id="lv"><a href="#">LV</a></li>
                     <?php error_reporting(0);
                     if($_COOKIE['user'] == ''): ?>
@@ -43,19 +45,19 @@
                 <?php 
                     $id = $_GET["id"];
                     $name = $_GET["name"];
-                    $mysql = new mysqli('localhost', 'root', 'kiki', 'kino');
+                    $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
                     $result = $mysql->query("SELECT `SeanssID`, `Datums`, DAY(`Datums`), MONTHNAME(`Datums`), MONTH(`Datums`), YEAR(`Datums`), HOUR(`No`), MINUTE(`No`), `No` FROM `seansi` WHERE `SeanssID` = '$id';");
                     $user = $result -> fetch_assoc();
                     $filma = $mysql->query("SELECT `FilmaID`, `Zanrs`, HOUR(`Ilgums`), MINUTE(`Ilgums`), `Vec ierobezojums`, `Apraksts`, `Attels`, `Nosaukums` FROM `filmas` WHERE `FilmaID` = '$name';");
                     $user2 = $filma -> fetch_assoc();
 
                 ?> 
-                <a href="films.php?id=<?php echo $user['filmas.FilmaID'];?>" class="poster">
+                <a href="films.php?id=<?php echo $user2['FilmaID'];?>" class="poster">
 
                         <img src="data:image/jpeg;base64, <?php echo base64_encode($user2['Attels']); ?>" alt="">
                 </a>                
                 <div class="film-name">
-                <a href="films.php?id=<?php echo $user['filmas.FilmaID'];?>"><p><?php
+                <a href="films.php?id=<?php echo $user2['FilmaID'];?>"><p><?php
                     echo htmlspecialchars($user2['Nosaukums']); 
                     ?></p></a>
                     <div class="description">
@@ -83,7 +85,7 @@
                     } elseif ($user2['Vec ierobezojums'] == 12) {
                         $color = 'green';
                     } elseif ($user2['Vec ierobezojums'] == 16) {
-                        $color = 'rgb(243, 230, 0)';
+                        $color = 'rgb(238, 115, 0)';
                     } else {
                         $color = 'red';
                     }
@@ -112,10 +114,10 @@
         ?>
 
         <!--SELECT-->
-        <form id="select" action="pirkums.php" method="post">
+        <form id="select" action="sedvietas-izvele.php" method="get">
             <div class="custom-select" id="datums">
                     <label for="pilsēta">Datums:</label>
-                    <select name="datums" id="town" required>
+                    <select name="id" id="town" required>
                     <option value="0" <?php echo $x ?> disabled hidden>Izvēlies</option>
                       <option value="<?php echo $user['SeanssID'] ?>" <?php echo $y ?>><?php echo $user['DAY(`Datums`)'] . '-' . $user['MONTH(`Datums`)'] . '-' . $user['YEAR(`Datums`)']?></option>
                     </select>
@@ -127,30 +129,21 @@
                     <option value="<?php echo $user['SeanssID'] ?>" <?php echo $y ?>><?php echo $user['HOUR(`No`)'] . ':' . $user['MINUTE(`No`)']?></option>
                     </select>
             </div>
-            <div class="custom-select" id="valoda">
-                    <label for="veids">Valoda:</label>
-                    <select name="valoda" id="type" required>
-                        <option value="" selected disabled hidden>Izvēlies</option>
-                        <option value="lv">Latviešu</option>
-                        <option value="ru">Krievu</option>
-                        <option value="en">Angļu</option>
-                    </select>
-            </div>
             <div class="custom-select">
                     <label>Daudzums:<br></label>
                     <input type="number" name="number" id="number" value="1" min="1" max="30" required>
             </div>
             <div id="buy-ticket">
-                <a><button type="submit" id="submit">Pirkt biļeti</button></a>
+                <a><button type="submit" id="submit">Izvēlēt sēdvietu</button></a>
             </div>
         </form>
 
         <footer id="footer">
             <div class="footer-links"><a href="seansi.php">Tuvākie seansi</a></div>
             <div class="footer-links"><a href="filmu-katalogs.php">Filmas</a></div>
-            <div class="footer-links"><a href="#">Par uzņēmumu</a></div>
+            <div class="footer-links"><a href="par-kinoteatru.php">Par kinoteātri</a></div>
             <div class="footer-links"><a href="#">Vakances</a></div>
-            <div class="footer-links"><a href="#">Kontakti</a></div>
+            <div class="footer-links"><a href="kontakti.php">Kontakti</a></div>
             <div class="footer-links"><a href="#">Privātuma politika</a></div>
             <div class="footer-links">
                 <a href="#"><img src="assets/img/Vector (1).png"></a>

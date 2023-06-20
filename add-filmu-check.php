@@ -13,7 +13,7 @@
     $imagetmp = addslashes(file_get_contents($_FILES['img_upload']['tmp_name']));
     
 
-    $mysql = new mysqli('localhost', 'root', 'kiki', 'kino');
+    $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
     $mysql->query("INSERT INTO `filmas` (`Nosaukums`, `Apraksts`, `Attels`, `Vec ierobezojums`, `Zanrs`, `Ilgums`) 
     VALUES('$film_name', '$apraksts', '$imagetmp', '$vec_ierobezojums', '$zanrs', '$ilgums')");
 

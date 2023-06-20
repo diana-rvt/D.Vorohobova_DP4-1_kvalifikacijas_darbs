@@ -11,7 +11,7 @@
     FILTER_SANITIZE_STRING);
 
     $id = $_GET['id'];
-    $mysql = new mysqli('localhost', 'root', 'kiki', 'kino');
+    $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
     print_r($_FILES['img_upload']['tmp_name']) ;
 
     if (!empty ($_FILES['img_upload']['tmp_name'])) {

@@ -2,7 +2,7 @@
 <html lang="lv">
     <head>
         <meta charset="utf-8">
-        <title>Filmas</title>
+        <title>Kontakti</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
         <link rel="stylesheet" type="text/css" href="assets/css/filmu-katalogs.css">
         <link rel="stylesheet" type="text/css" href="assets/css/header-style.css">
@@ -37,41 +37,12 @@
                 </ul>
             </nav>
         </header>
-        <h1>Filmas</h1>
-        <div id="katalog">
-            <?php
-            $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
-            $max_number = $mysql->query("SELECT MAX(`FilmaID`) FROM `filmas`");
-            $max_n = $max_number -> fetch_assoc();
-            $search_result = $_GET["search"];
-            for ($x = $max_n['MAX(`FilmaID`)']; $x >= 1; $x--) { 
-                $result = $mysql->query("SELECT `Nosaukums` FROM `filmas` WHERE `FilmaID` = '$x' AND (`Nosaukums` LIKE '%$search_result%' OR `Zanrs` LIKE '%$search_result%' OR `Apraksts` LIKE '%$search_result%')");
-                $user = $result -> fetch_assoc();
-                if (!empty($user['Nosaukums'])): ?> 
-
-                
-                <div class="film">
-                    <a href="films.php?id=<?php echo $x;?>" class="poster">
-                    <?php 
-                        $result = $mysql->query("SELECT `Nosaukums`, `Apraksts`, `Attels` FROM `filmas` WHERE `FilmaID` = '$x'");
-                        $user = $result -> fetch_assoc();
-                        ?> 
-                        <img src="data:image/jpeg;base64, <?php echo base64_encode($user['Attels']); ?>" alt="">
-                    </a>
-                
-                    <div class="film-name">
-                        <a href="films.php?id=<?php echo $x;?>">
-                            <?php echo htmlspecialchars($user['Nosaukums']); ?>
-                        </a>
-                    </div>
-                </div>
-                
-
-                <?php endif; } ?>
-            <div class="film" style="height: 10px;"></div>
-            <div class="film" style="height: 10px;"></div>
-            <div class="film" style="height: 10px;"></div>
-            <div class="film" style="height: 10px;"></div>
+        <h1>Kontakti</h1>
+        <div id="about_kino">
+            <p class="about_kino">Tālrunis: +371 22 600 455</p>
+            <p class="about_kino">E-mail: mycinema.support@gmail.com</p>
+            <p class="about_kino">Adrese: Krasta iela 76, Rīga, LV-1019</p>
+            
         </div>
         <footer id="footer">
             <div class="footer-links"><a href="seansi.php">Tuvākie seansi</a></div>

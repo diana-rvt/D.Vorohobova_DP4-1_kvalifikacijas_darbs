@@ -2,9 +2,9 @@
 <html lang="lv">
     <head>
         <meta charset="utf-8">
-        <title>Pievienot filmu</title>
+        <title>Mans profils</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
-        <link rel="stylesheet" type="text/css" href="assets/css/add-filmu.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/rediget-mans-profils.css">
         <link rel="stylesheet" type="text/css" href="assets/css/header-style.css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     </head>
@@ -27,7 +27,6 @@
                         <?php if($_COOKIE['user'] == 'admin@mail.com'): ?>
                         <li id="profils"><a href="admin.php">Admin</a></li>
                         <?php else: ?>
-                        <?php header('Location: /');?>
                         <li id="profils"><a href="mans-profils.php">Profils</a></li>
                         <?php endif;?>
                     <?php endif;?>
@@ -38,55 +37,42 @@
                 </ul>
             </nav>
         </header>
-        <h1>Rediģēt filmu</h1>
-        
-
-        <!--SELECT-->
-        <div id="container2">
-            <?php $id = $_GET['id'] ?> 
-            <form id="select" action="rediget-filmu-check.php?id=<?php echo $_GET['id'];?>" method="post" enctype="multipart/form-data">
-            <?php 
+        <h1>Mans profils</h1>
+        <?php $id = $_GET['id'] ?> 
+        <form id="select" action="rediget-mans-profils-check.php?id=<?php echo $_GET['id'];?>" method="post" enctype="multipart/form-data">
+        <div class="container">
+        <?php 
             $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
-            $old_info_sql = $mysql->query("SELECT `FilmaID`, `Nosaukums`, `Apraksts`, `Attels`, `Zanrs`, `Ilgums`, `Vec ierobezojums`
-            FROM `filmas`
-            WHERE `FilmaID` = '$id'");
+            $old_info_sql = $mysql->query("SELECT `LietotajsID`, `Vards`, `Uzvards`, `Dzimsanas diena`, `Talrunis`, `Email`, `Parole`
+            FROM `lietotaji`
+            WHERE `Email` = '$id'");
             $old_info = $old_info_sql -> fetch_assoc();
-            ?>    
-                <div id="katalog">
-                <div class="film">
-                    <a class="poster">
-                        <div class="poster-picture">
-                            <input type="file" name="img_upload" id="img_upload">
-                        </div>
-                    </a>
-                    <div class="film-name">
-                        <input type="text" name="film-name" id="film-name" placeholder="Nosaukums" value="<?php echo $old_info['Nosaukums'] ?>" required>
-                        <div class="description">
-                            <textarea type="text" name="apraksts" id="apraksts" placeholder="Apraksts" required><?php echo $old_info['Apraksts'] ?></textarea>
-                        </div>
-                        <div class="custom-select" id="datums">
-                            <label for="vec_ierobezojums">Vec. ierobežojums:</label>
-                            <select name="vec_ierobezojums" id="town" required>
-                                <option value="<?php echo $old_info['Vec ierobezojums'] ?>"><?php echo $old_info['Vec ierobezojums'] ?></option>
-                                <option value="0">0</option>
-                                <option value="6">6</option>
-                                <option value="12">12</option>
-                                <option value="16">16</option>
-                                <option value="18">18</option>
-                            </select>
-                        </div> 
-                        <input type="text" name="zanrs" class="zanrs_ilgums" placeholder="Žanrs" value="<?php echo $old_info['Zanrs'] ?>" required>
-                        <input type="time" name="ilgums" class="zanrs_ilgums" placeholder="Ilgums" value="<?php echo $old_info['Ilgums'] ?>" required>
-                    </div>
+        ?>
+            <div>
+                <p>Vārds:</p><p><input type="text" name="name" id="name" placeholder="Vārds" value="<?=$old_info['Vards']?>" required></p>
+            </div>
+            <div>
+                <p>Uzvārds:</p><p><input type="text" name="surname" id="surname" placeholder="Uzvārds" value="<?=$old_info['Uzvards']?>" required></p>
+            </div>
+            <div>
+                <p>Dzimšanas datums:</p><p><input type="date" name="date" id="date" placeholder="Dzimšanas diena" value="<?=$old_info['Dzimsanas diena']?>" required></p>
+            </div>
+            <div>
+                <p>Tālrunis:</p><p><span id="n371">+371</span><input type="phone" name="phone" id="phone" placeholder="Tālrunis" value="<?=$old_info['Talrunis']?>" required></p>
+            </div>
+            <div>
+                <p>E-mail:</p><p><input type="email" name="email" id="email" placeholder="Email" value="<?=$old_info['Email']?>" required></p>
                 </div>
-                </div>
-                <div id="buy-ticket">
-                    <a href=""><button type="submit">Rediģēt</button></a>
-                </div>
-            </form>
+                
         </div>
-            
-        
+                <div id="dzest">
+                    <a href=""><button type="submit">Rediģēt</button></a>
+                    <a href="mans-profils.php">
+                        Atpakaļ
+                    </a>
+                </div>
+        </form>
+    
 
         <footer id="footer">
             <div class="footer-links"><a href="seansi.php">Tuvākie seansi</a></div>

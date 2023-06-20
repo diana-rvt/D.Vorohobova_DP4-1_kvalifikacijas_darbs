@@ -16,9 +16,20 @@
                 <ul id="menu">
                     <li><a href="seansi.php">Tuvākie seansi</a></li>
                     <li><a href="filmu-katalogs.php">Filmas</a></li>
+                    <li><a href="piedavajumi.php">Piedāvājumi</a></li>
+                    <li><a href="par-kinoteatru.php">Par mums</a></li>
                     <li id="lv"><a href="#">LV</a></li>
+                    <?php error_reporting(0);
+                    if($_COOKIE['user'] == ''): ?>
                     <li id="login-button"><a href="pievienoties.html">Ienākt</a></li>
-                    <li id="profils"><a href="mans-profils.php">Profils</a></li>
+                    <?php else: ?>
+                        <li id="login-button"><a href="exit.php">Iziet</a></li>
+                        <?php if($_COOKIE['user'] == 'admin@mail.com'): ?>
+                        <li id="profils"><a href="admin.php">Admin</a></li>
+                        <?php else: ?>
+                        <li id="profils"><a href="mans-profils.php">Profils</a></li>
+                        <?php endif;?>
+                    <?php endif;?>
                     <li id="search">
                     <form action="filmu-katalogs.php?search=<?php echo $_GET['search'];?>" method="get"><input type="search" name="search" placeholder="Atrast filmu">
                         </form>
@@ -42,9 +53,9 @@
         <footer id="footer">
             <div class="footer-links"><a href="seansi.php">Tuvākie seansi</a></div>
             <div class="footer-links"><a href="filmu-katalogs.php">Filmas</a></div>
-            <div class="footer-links"><a href="#">Par uzņēmumu</a></div>
+            <div class="footer-links"><a href="par-kinoteatru.php">Par kinoteātri</a></div>
             <div class="footer-links"><a href="#">Vakances</a></div>
-            <div class="footer-links"><a href="#">Kontakti</a></div>
+            <div class="footer-links"><a href="kontakti.php">Kontakti</a></div>
             <div class="footer-links"><a href="#">Privātuma politika</a></div>
             <div class="footer-links">
                 <a href="#"><img src="assets/img/Vector (1).png"></a>

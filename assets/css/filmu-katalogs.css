@@ -47,3 +47,14 @@
     color: orange;
     transition: .1s ease-in-out;
 }
+
+#about_kino {
+    max-width: 700px;
+    color: #464646;
+    margin: auto;
+    line-height: 20px;
+
+}
+.about_kino {
+    padding-bottom: 10px;
+}

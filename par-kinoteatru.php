@@ -2,7 +2,7 @@
 <html lang="lv">
     <head>
         <meta charset="utf-8">
-        <title>Filmas</title>
+        <title>Par kinoteātri</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
         <link rel="stylesheet" type="text/css" href="assets/css/filmu-katalogs.css">
         <link rel="stylesheet" type="text/css" href="assets/css/header-style.css">
@@ -37,41 +37,13 @@
                 </ul>
             </nav>
         </header>
-        <h1>Filmas</h1>
-        <div id="katalog">
-            <?php
-            $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
-            $max_number = $mysql->query("SELECT MAX(`FilmaID`) FROM `filmas`");
-            $max_n = $max_number -> fetch_assoc();
-            $search_result = $_GET["search"];
-            for ($x = $max_n['MAX(`FilmaID`)']; $x >= 1; $x--) { 
-                $result = $mysql->query("SELECT `Nosaukums` FROM `filmas` WHERE `FilmaID` = '$x' AND (`Nosaukums` LIKE '%$search_result%' OR `Zanrs` LIKE '%$search_result%' OR `Apraksts` LIKE '%$search_result%')");
-                $user = $result -> fetch_assoc();
-                if (!empty($user['Nosaukums'])): ?> 
-
-                
-                <div class="film">
-                    <a href="films.php?id=<?php echo $x;?>" class="poster">
-                    <?php 
-                        $result = $mysql->query("SELECT `Nosaukums`, `Apraksts`, `Attels` FROM `filmas` WHERE `FilmaID` = '$x'");
-                        $user = $result -> fetch_assoc();
-                        ?> 
-                        <img src="data:image/jpeg;base64, <?php echo base64_encode($user['Attels']); ?>" alt="">
-                    </a>
-                
-                    <div class="film-name">
-                        <a href="films.php?id=<?php echo $x;?>">
-                            <?php echo htmlspecialchars($user['Nosaukums']); ?>
-                        </a>
-                    </div>
-                </div>
-                
-
-                <?php endif; } ?>
-            <div class="film" style="height: 10px;"></div>
-            <div class="film" style="height: 10px;"></div>
-            <div class="film" style="height: 10px;"></div>
-            <div class="film" style="height: 10px;"></div>
+        <h1>Par kinoteātri</h1>
+        <div id="about_kino">
+            <p class="about_kino">Kinoteātris "MyCinema" savas durvis skatītājiem vēra 2023. gada 20. janvārī. Mēs cenšamies nodrošināt saviem apmeklētājiem vislabāko filmu pieredzi, izmantojot visjaunākās tehnoloģijas un aprīkojumu. Mūsu kinoteātrī ir mājīgas zāles ar ērtiem sēdekļiem un izcilu skaņas un attēla kvalitāti. Ar prieku piedāvājam Jums plašu dažādu žanru un virzienu filmu izvēli.</p>
+            <p class="about_kino">"MyCinema" var baudīt gan jaunākās kino industrijas izlaidumus, gan klasiskās filmas. Mēs arī rīkojam īpašus seansus un pasākumus par dažādām tēmām un pasākumiem. Mūsu komanda vienmēr ir gatava jums palīdzēt izvēlēties filmu un atbildēt uz visiem jautājumiem.</p>
+            <p class="about_kino">Turklāt MyCinema varat iegādāties dažādas uzkodas un dzērienus, lai uzlabotu skatīšanās pieredzi. Piedāvājam plašu popkorna, saldumu un citu kārumu izvēli. Un mūsu biļešu cenas vienmēr ir pieejamas un konkurētspējīgas.</p>
+            <p class="about_kino">Mēs pastāvīgi strādājam, lai uzlabotu mūsu pakalpojumu kvalitāti un paplašinātu piedāvāto filmu klāstu. Mūsu mērķis ir padarīt jūsu "MyCinema" apmeklējumu neaizmirstamu un patīkamu.</p>
+            <p class="about_kino">Laipni lūdzam kino pasaulē ar "MyCinema"!</p>
         </div>
         <footer id="footer">
             <div class="footer-links"><a href="seansi.php">Tuvākie seansi</a></div>

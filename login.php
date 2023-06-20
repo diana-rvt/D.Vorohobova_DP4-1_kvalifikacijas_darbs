@@ -5,7 +5,7 @@
     FILTER_SANITIZE_STRING);
 
 
-    $mysql = new mysqli('localhost', 'root', 'kiki', 'kino');
+    $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
     $result = $mysql->query("SELECT `Vards`, `Uzvards`, `Dzimsanas diena`, `Talrunis`, `Email`, `Parole` FROM `lietotaji` WHERE `Email` = '$email' AND `Parole` = '$pass'");
 
     $user = $result -> fetch_assoc();

@@ -32,7 +32,7 @@
         exit();
     }
 
-    $mysql = new mysqli('localhost', 'root', 'kiki', 'kino');
+    $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
     $result = $mysql->query("SELECT (`Email`) FROM `lietotaji` WHERE `Email` = '$email'");
     $user = $result -> fetch_assoc();
     

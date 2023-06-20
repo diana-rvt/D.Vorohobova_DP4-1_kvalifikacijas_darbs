@@ -4,14 +4,18 @@
     $mail = new PHPMailer;
     $mail->CharSet = 'utf-8';
 
-
+    $nosaukums = $_POST['nosaukums'];
+    $seanssid = $_POST['seanssid'];
     $datums = $_POST['datums'];
-    $valoda = $_POST['valoda'];
+    $laiks = $_POST['laiks'];
+    $sedvieta = $_POST['sedvieta'];
     $number = $_POST['number'];
+    $cena = $_POST['cena'];
     $email = $_COOKIE['user'];
-    $gal_cena = 8;
 
-    $mysql = new mysqli('localhost', 'root', 'kiki', 'kino');
+    $gal_cena = $cena/$number;
+
+    $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
 
     $result = $mysql->query("SELECT `LietotajsID`, `Vards` FROM `lietotaji` WHERE `Email` = '$email'");
     $user = $result -> fetch_assoc();
@@ -19,15 +23,20 @@
     $lietotajs = $user['LietotajsID'];
     $vards = $user['Vards'];
 
+    $kods1 = $lietotajs + 1000;
+    $kods2 = $seanssid + 200;
+    $kods3 = $sedvieta[0] + 300;
+
     $cena = 0;
 
-    for ($x = $number; $x >= 1; $x--) {
-        $mysql->query("INSERT INTO `biletes` (`LietotajsID`, `SeanssID`, `Valoda`, `Galiga cena`) 
-    VALUES('$lietotajs', '$datums', '$valoda', '$gal_cena')");
+    for ($x = 0; $x < count($sedvieta); $x++) {
+        $sedvieta2 = $sedvieta[$x];
+        $mysql->query("INSERT INTO `biletes` (`LietotajsID`, `SeanssID`, `SedvietaID`, `Galiga cena`) 
+    VALUES('$lietotajs', '$seanssid', '$sedvieta2', '$gal_cena')");
     $cena = $cena+$gal_cena;
     }
 
-    $result2 = $mysql->query("SELECT `Datums`, `No` FROM `seansi` WHERE `SeanssID` = '$datums'");
+    $result2 = $mysql->query("SELECT `Datums`, `No` FROM `seansi` WHERE `SeanssID` = '$seanssid'");
     $user2 = $result2 -> fetch_assoc();
     
     $datums2 = $user2['Datums'];
@@ -36,7 +45,7 @@
     $result3 = $mysql->query("SELECT `Nosaukums` FROM `filmas` 
     INNER JOIN `seansi` 
     ON `seansi`.`FilmaID` = `filmas`.`FilmaID` 
-    WHERE `SeanssID` = '$datums'");
+    WHERE `SeanssID` = '$seanssid'");
     
     $user3 = $result3 -> fetch_assoc();
     $nosaukums = $user3['Nosaukums'];
@@ -44,6 +53,7 @@
     
     $mysql->close();
 
+    
     $mail->isSMTP();
     $mail->Host = 'smtp.mail.ru';
     $mail->SMTPAuth = true;
@@ -58,8 +68,9 @@
     $mail->isHTML(true);
 
     $mail->Subject = 'Paldies par pirkumu, ' . $vards . '!';
-    $mail->Body    = 'Filmas nosaukums: ' . $nosaukums . '.' . '<br>Pirkuma cena ir: ' . $cena . '.00€.' . '<br>Datums: ' . $datums2 . '.' . '<br>Laiks: ' . $laiks2 . '.' . '<br>Biļešu skaits: ' . $number . '.';
+    $mail->Body    = '<p style="font-size: 30px; text-align: center;">M' . $kods1 . '' . $kods2 . '' . $kods3 . '</p><br>Filmas nosaukums: ' . $nosaukums . '.' . '<br>Pirkuma cena ir: ' . number_format($cena, 2) . '€.' . '<br>Datums: ' . $datums2 . '.' . '<br>Laiks: ' . $laiks2 . '.' . '<br>Biļešu skaits: ' . $number . '.';
     $mail->AltBody = '';
+    
 
     
 

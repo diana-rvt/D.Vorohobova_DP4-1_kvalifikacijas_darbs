@@ -9,7 +9,7 @@
     FILTER_SANITIZE_STRING);
 
 
-    $mysql = new mysqli('localhost', 'root', 'kiki', 'kino');
+    $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
     $mysql->query("INSERT INTO `seansi` (`TelpaID`, `FilmaID`, `Datums`, `No`) 
     VALUES('$telpa', '$film_name', '$date', '$time')");
 

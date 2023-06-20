@@ -1,7 +1,7 @@
 <?php
     $id = $_GET["id"];
     
-    $mysql = new mysqli('localhost', 'root', 'kiki', 'kino');
+    $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
     $mysql->query("DELETE FROM `lietotaji` WHERE `Email` = '$id' ");
 
     $mysql->close();

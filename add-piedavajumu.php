@@ -2,9 +2,9 @@
 <html lang="lv">
     <head>
         <meta charset="utf-8">
-        <title>Pievienot filmu</title>
+        <title>Pievienot piedāvājumu</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
-        <link rel="stylesheet" type="text/css" href="assets/css/add-filmu.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/add-piedavajumu.css">
         <link rel="stylesheet" type="text/css" href="assets/css/header-style.css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     </head>
@@ -38,50 +38,46 @@
                 </ul>
             </nav>
         </header>
-        <h1>Rediģēt filmu</h1>
+        <h1>Pievienot piedāvājumu</h1>
         
 
         <!--SELECT-->
         <div id="container2">
-            <?php $id = $_GET['id'] ?> 
-            <form id="select" action="rediget-filmu-check.php?id=<?php echo $_GET['id'];?>" method="post" enctype="multipart/form-data">
-            <?php 
-            $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
-            $old_info_sql = $mysql->query("SELECT `FilmaID`, `Nosaukums`, `Apraksts`, `Attels`, `Zanrs`, `Ilgums`, `Vec ierobezojums`
-            FROM `filmas`
-            WHERE `FilmaID` = '$id'");
-            $old_info = $old_info_sql -> fetch_assoc();
-            ?>    
+            <form id="select" action="add-piedavajumu-check.php" method="post" enctype="multipart/form-data">
                 <div id="katalog">
                 <div class="film">
                     <a class="poster">
                         <div class="poster-picture">
-                            <input type="file" name="img_upload" id="img_upload">
                         </div>
                     </a>
                     <div class="film-name">
-                        <input type="text" name="film-name" id="film-name" placeholder="Nosaukums" value="<?php echo $old_info['Nosaukums'] ?>" required>
+                        <input type="text" name="nosaukums" id="film-name" placeholder="Nosaukums" required>
                         <div class="description">
-                            <textarea type="text" name="apraksts" id="apraksts" placeholder="Apraksts" required><?php echo $old_info['Apraksts'] ?></textarea>
+                            <textarea type="text" name="apraksts" id="apraksts" placeholder="Apraksts" required></textarea>
                         </div>
                         <div class="custom-select" id="datums">
-                            <label for="vec_ierobezojums">Vec. ierobežojums:</label>
-                            <select name="vec_ierobezojums" id="town" required>
-                                <option value="<?php echo $old_info['Vec ierobezojums'] ?>"><?php echo $old_info['Vec ierobezojums'] ?></option>
-                                <option value="0">0</option>
-                                <option value="6">6</option>
-                                <option value="12">12</option>
-                                <option value="16">16</option>
-                                <option value="18">18</option>
-                            </select>
-                        </div> 
-                        <input type="text" name="zanrs" class="zanrs_ilgums" placeholder="Žanrs" value="<?php echo $old_info['Zanrs'] ?>" required>
-                        <input type="time" name="ilgums" class="zanrs_ilgums" placeholder="Ilgums" value="<?php echo $old_info['Ilgums'] ?>" required>
+                        <label for="film-name">Filma:</label>
+                        <select name="film-name" id="town" required>
+                        <option value="">Izvēlies</option>
+                        <?php
+                        $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
+                        $max_number = $mysql->query("SELECT MAX(`FilmaID`) FROM `filmas`");
+                        $max_n = $max_number -> fetch_assoc();
+                        for ($x = $max_n['MAX(`FilmaID`)']; $x >= 1; $x--) {
+                        $film_name = $mysql->query("SELECT `Nosaukums` FROM `filmas` WHERE `FilmaID`=$x");
+                        $film_name_2 = $film_name -> fetch_assoc();
+                        if (!empty($film_name_2['Nosaukums'])):
+                        ?>
+                        <option value="<?php echo $x ?>"><?php echo $film_name_2['Nosaukums'] ?></option>
+                        <?php endif; } ?>
+                        </select>
+                        </div>
+                        <input type="number" name="number" class="zanrs_ilgums" placeholder="Procents" required> %
                     </div>
                 </div>
                 </div>
                 <div id="buy-ticket">
-                    <a href=""><button type="submit">Rediģēt</button></a>
+                    <a href="#"><button type="submit">Pievienot piedāvājumu</button></a>
                 </div>
             </form>
         </div>

@@ -1,3 +1,5 @@
+
+
 var x, i, j, l, ll, selElmnt, a, b, c, riga, edisana;
 /*look for any elements with the class "custom-select":*/
 x = document.getElementsByClassName("custom-select");
@@ -77,3 +79,4 @@ function closeAllSelect(elmnt) {
 /*if the user clicks anywhere outside the select box,
 then close all select boxes:*/
 document.addEventListener("click", closeAllSelect);
+

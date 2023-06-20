@@ -10,7 +10,7 @@
     $id = $_GET['id'];
 
 
-    $mysql = new mysqli('localhost', 'root', 'kiki', 'kino');
+    $mysql = new mysqli('localhost', 'dianarvt', 'DianaRVT13', 'diana_rvt');
     $mysql->query("UPDATE `seansi`
     SET `TelpaID` = '$telpa', 
     `FilmaID` = '$film_name', 

@@ -2,7 +2,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    max-width: 1100px;
+    max-width: 950px;
     padding: 0px 20px;
     margin-left: auto;
     margin-right: auto;
@@ -22,12 +22,16 @@
     background-color: orange;
     border-radius: 8px;
     width: 153px;
-    height: 230px;
+    height: 160px;
+    text-align: center;
+    color: white;
+    font-weight: 900;
+    line-height: 160px;
+    font-size: 50px;
 }
 
 #seansu-katalog .poster img {
     width: 153px;
-    height: 230px;
 }
 
 #seansu-katalog .film-name {
@@ -40,27 +44,12 @@
     padding-right: 20px;
 }
 
-
-
 #seansu-katalog .film-name .name_description {
-    min-height: 180px;
-}
-
-#seansu-katalog .film-name a {
+    min-height: 110px;
     color: black;
-    text-decoration: none;
     line-height: 36px;
     font-size: 24px;
 }
-
-
-
-#seansu-katalog .film-name a:hover {
-    color: orange;
-    transition: .1s ease-in-out;
-}
-
-
 
 .date-time {
     border-left: solid 2px #d1d1d1;
@@ -78,16 +67,16 @@
 .description {
     padding-top: 20px;
     color: #464646;
+    font-size: 18px;
+    line-height: 18px;
 }
-
-
 
 /* BUTTON */
 
 .date-time button {
     font-family: 'Montserrat';
     border: none;
-    margin-top: 68px;
+    margin-top: 75px;
     padding: 0 14px;
     font-size: 18px;
     background-color: orange;
@@ -118,8 +107,3 @@
     color: #ffffff;
     float: right;
   }
-  
-#lidz {
-    font-size: 18px;
-    color: grey;
-}
